@@ -1,13 +1,15 @@
-const { translate } = require('./api')
+import { translate } from './api'
 
 // Get settings
 const settingsKeys = [
+  'provider',
   'keyValue',
   'useCtrlKey',
   'useMetaKey',
   'useShiftKey',
   'useAltKey',
   'targetLanguage',
+  'yandexApiKey',
 ]
 let settings = {}
 settingsKeys.forEach(key => {
@@ -49,7 +51,7 @@ function handleFinishedGetSelectedText(msg) {
     return
   }
 
-  translate(msg.message, settings.targetLanguage)
+  translate(msg.message, settings)
     .then(translatedText => {
       target.page.dispatchMessage('updatePanel', translatedText)
     })

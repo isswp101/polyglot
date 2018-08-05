@@ -4,6 +4,26 @@
 <array>
 	<dict>
 		<key>DefaultValue</key>
+		<string>google</string>
+		<key>Key</key>
+		<string>provider</string>
+		<key>Title</key>
+		<string>Provider</string>
+		<key>Titles</key>
+		<array>
+			<string>Google Translate</string>
+			<string>Yandex Translate</string>
+		</array>
+		<key>Type</key>
+		<string>PopUpButton</string>
+		<key>Values</key>
+		<array>
+			<string>google</string>
+			<string>yandex</string>
+		</array>
+	</dict>
+	<dict>
+		<key>DefaultValue</key>
 		<string>en</string>
 		<key>Key</key>
 		<string>targetLanguage</string>
@@ -199,6 +219,20 @@
 			<string>yo</string>
 			<string>zu</string>
 		</array>
+	</dict>
+	<dict>
+		<key>Title</key>
+		<string>Yandex Translate</string>
+		<key>Type</key>
+		<string>Group</string>
+	</dict>
+	<dict>
+		<key>Key</key>
+		<string>yandexApiKey</string>
+		<key>Title</key>
+		<string>API Key</string>
+		<key>Type</key>
+		<string>TextField</string>
 	</dict>
 	<dict>
 		<key>Title</key>
