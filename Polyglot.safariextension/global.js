@@ -9,6 +9,7 @@ const settingsKeys = [
   'useShiftKey',
   'useAltKey',
   'targetLanguage',
+  'instantTranslation',
   'yandexApiKey',
 ]
 let settings = {}
@@ -25,7 +26,9 @@ safari.extension.settings.addEventListener('change', settingsChanged, false)
 function performCommand(event) {
   const { command } = event
   if (command === 'translateSelectedText') {
-    safari.application.activeBrowserWindow.activeTab.page.dispatchMessage('getSelectedText')
+    safari.application.activeBrowserWindow.activeTab.page.dispatchMessage(
+      'getSelectedText'
+    )
   }
 }
 
@@ -44,7 +47,10 @@ function handleFinishedGetSelectedText(msg) {
     return
   }
   const target = msg.target
-  target.page.dispatchMessage('showPanel', '<div class="polyglot__loader">Loading</div>')
+  target.page.dispatchMessage(
+    'showPanel',
+    '<div class="polyglot__loader">Loading</div>'
+  )
 
   if (settings.targetLanguage === '') {
     target.page.dispatchMessage('updatePanel', 'Set target language')

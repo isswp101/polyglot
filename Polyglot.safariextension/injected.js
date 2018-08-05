@@ -6,6 +6,7 @@ const PANEL_ID = 'polyglot__panel'
 if (window.top === window) {
   window.addEventListener('keypress', handleKeypress, false)
   window.addEventListener('mouseup', handleMouseUp, false)
+  window.addEventListener('click', handleClick, false)
 
   safari.self.addEventListener('message', handleMessage, false)
   safari.self.tab.dispatchMessage('getSettings')
@@ -49,9 +50,18 @@ function handleKeypress(e) {
   }
 }
 
+function handleClick(e) {
+  if (!settings.instantTranslation || e.target.id === PANEL_ID) {
+    return
+  }
+  getSelectedText()
+}
+
 function getSelectedText() {
   const selectedText = window.getSelection().toString()
-  safari.self.tab.dispatchMessage('finishedGetSelectedText', selectedText)
+  if (selectedText && selectedText !== '\n') {
+    safari.self.tab.dispatchMessage('finishedGetSelectedText', selectedText)
+  }
 }
 
 function removePanel() {
@@ -80,7 +90,9 @@ function showPanel(content) {
 
 function updatePanel(content) {
   const el = document.getElementById(PANEL_ID)
-  el.innerHTML = content
+  if (el) {
+    el.innerHTML = content
+  }
 }
 
 // Return selection coords
