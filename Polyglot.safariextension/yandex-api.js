@@ -16,7 +16,7 @@ export async function translate(text, targetLanguage, apiKey) {
     const body = await response.text()
     const data = JSON.parse(body)
     const translatedText = data.text[0].replace(/(?:\r\n|\r|\n)/g, '<br/>')
-    return `[Y] ${translatedText}`
+    return translatedText
   } catch (err) {
     Promise.reject(err)
   }
